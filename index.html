@@ -3,7 +3,9 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+      <!--meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" >
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" -->
+      <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
       <title>Abs-olutely hot! Stomachs of the stars</title>
       <meta name="nydn_section" content="Lifestyle"/>
       <meta property="fb:app_id" content="107464888913"/>
@@ -80,6 +82,76 @@
          };
       </script> <script data-main="javascripts/rg.js?r=201706290008"
       src="http://assets.nydailynews.com/nydn/js/require.js?r=20170802200009" defer></script>  
+
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+
+<style>
+/*html, body, #rg-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}*/
+#rgs-details {
+    bottom: unset;
+}
+#rg-description {
+    display: block;
+    overflow: scroll;
+}
+#rg-body {
+  height:100vh;
+}
+</style>
+<script type="text/javascript">
+function adaptCSSFbBrowser() {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    // if (isFacebookApp(ua)) { // Facebook in-app browser detected
+    //     $('#rg-body').css('height', '0'); // Update css
+    // }
+    // $('.bottombar').css('height', '50vh');
+    // var html = document.querySelector('html');
+    // html.style.height = '50px';
+
+    var windowHeight = 300;
+    // var windowHeight = window.innerHeight;
+    // var windowHeight = $(window).height()
+    // var windowHeight = window.screen.height;
+    // var windowHeight = document.documentElement.clientHeight;
+    // var windowHeight = document.documentElement.clientHeight;
+    // var windowHeight = document.body.clientHeight;
+    var windowHeight = document.body.offsetHeight;
+    // var windowHeight = document.body.scrollHeight
+    // var windowHeight = window.screen.height 
+    // var windowHeight = window.screen.availHeight;
+
+$( "#rg-description" ).append( "<p>window.innerHeight</p>" + window.innerHeight );
+$( "#rg-description" ).append( "<p>$(window).height()</p>" + $(window).height() );
+$( "#rg-description" ).append( "<p>window.screen.height</p>" + window.screen.height );
+$( "#rg-description" ).append( "<p>document.documentElement.clientHeight</p>" + document.documentElement.clientHeight );
+$( "#rg-description" ).append( "<p>document.body.clientHeight</p>" + document.body.clientHeight );
+$( "#rg-description" ).append( "<p>document.body.offsetHeight</p>" + document.body.offsetHeight );
+$( "#rg-description" ).append( "<p>document.body.scrollHeight</p>" + document.body.scrollHeight );
+$( "#rg-description" ).append( "<p> window.screen.height </p>" +  window.screen.height  );
+$( "#rg-description" ).append( "<p>window.screen.availHeight</p>" + window.screen.availHeight );
+
+    document.getElementById('rg-body').style.height = windowHeight + 'px';
+    console.log('testies - ' + document.body.style.height);
+  };
+
+$(document).ready(function() {
+//  alert('testies');
+  adaptCSSFbBrowser();
+});
+</script>
+
+
+
    </head>
    <body data-section="life & style" id="rg" class="cover adWide3on">
       <style>#rgc {display: block;}</style>
@@ -95,8 +167,8 @@
          <section id="rgc">
             <header id="rg-headers">
                <h1 id="rg-headline" itemprop="headline">Abs-olutely hot! Stomachs of the stars</h1>
-               <div id="rg-headline-short">Abs-olutely hot! Stomachs of the stars</div>
-               <h3 id="rg-description" itemprop="description">These celebrities aren't just pretty faces... they've got miraculous midsections as well! </h3>
+               <div id="rg-headline-short">AAbs-olutely hot! Stomachs of the stars</div>
+               <h3 id="rg-description" itemprop="description"></h3>
             </header>
             <a id="rgc-to-s-1" href="http://www.nydailynews.com/life-style/abs-olutely-hot-stomachs-stars-gallery-1.2556823?pmSlide=1.3474311">View Gallery</a> <a id="rgc-to-s-2" href="http://www.nydailynews.com/life-style/abs-olutely-hot-stomachs-stars-gallery-1.2556823?pmSlide=1.3474311">Next</a>  <img itemtype='schema.org/ImageObject' id='rgc-img' itemprop='primaryImageOfPage' alt='khloe kardash_090617v2-gthmb' src='http://assets.nydailynews.com/polopoly_fs/1.3474311.1504716608!/img/httpImage/image.jpg_gen/derivatives/gallery_1200/khloe-kardashian.jpg' itemid='http://assets.nydailynews.com/polopoly_fs/1.3474311.1504716608!/img/httpImage/image.jpg_gen/derivatives/gallery_1200/khloe-kardashian.jpg' itemscope='' />  
          </section>
