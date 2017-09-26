@@ -6,10 +6,12 @@ var nydnRequires = require.config({
     waitSeconds: 10
 });
 
-nydn.domain =
-    window.location.href.split("/")[2] == "wwwqa.nydailynews.com"
-        ? "wwwqa.nydailynews.com"
-        : "assets.nydailynews.com";
+var localIP = "http://172.24.62.83:3000";
+
+nydn.domain = "assets.nydailynews.com";
+    // window.location.href.split("/")[2] == "wwwqa.nydailynews.com"
+    //     ? "wwwqa.nydailynews.com"
+    //      : "assets.nydailynews.com";
 nydn.domain =
     window.location.href.indexOf("mockups") > -1
         ? "js/"
@@ -38,7 +40,7 @@ Array.prototype.contains = function(needle) {
 var cc_client_id = 4867;
 var cc_extr_callback = "ccauds";
 nydnRequires([nydn.urls.nydnQuery], function() {
-    //console.log("nydn function: jquery download âœ“");
+    ////console.log("nydn function: jquery download âœ“");
     $(function() {
         rg.initialize();
         //$("#rg-body").css("border","1px solid red");
@@ -63,7 +65,8 @@ rg.id = nydn.contentID;
 //     rg.jsonUrl = nydn.urls.jsonM + rg.id;
 // else rg.jsonUrl = nydn.urls.json + rg.id;
 
-rg.jsonUrl = "http://10.0.1.20:3000/json/rg.json";
+// rg.jsonUrl = "http://10.0.1.20:3000/json/rg.json";
+rg.jsonUrl = localIP + "/json/rg.json";
 
 // var objKeysRegex = /({|,)(?:\s*)(?:')?([A-Za-z_$\.][A-Za-z0-9_ \-\.$]*)(?:')?(?:\s*):/g;// look for object names
 // var newQuotedKeysString = rg.jsonUrl.replace(objKeysRegex, "$1\"$2\":");// all object names should be double quoted
@@ -173,7 +176,7 @@ rg.initialize = function() {
 
 rg.shareStart = function() {
     nydnRequires([nydn.urls.rShare], function() {
-        //console.log("nydn function: rShare dowloaded âœ“");
+        ////console.log("nydn function: rShare dowloaded âœ“");
         var rgShare = new rShare(".rt-share", rgShareOptions);
     });
 };
@@ -215,7 +218,7 @@ rg.click = function() {
         }
 
         if (rg.target != "" && typeof rg.target !== "undefined") {
-            //console.log('theres a target!', rg.target)
+            ////console.log('theres a target!', rg.target)
 
             switch (rg.target) {
                 case "rgc":
@@ -330,21 +333,21 @@ rg.click = function() {
     var handled = false;
 
     $("#rgs-next").on("click touchstart", function(e) {
-        //console.log('rgs-next event: ', e)
+        ////console.log('rgs-next event: ', e)
         e.preventDefault();
         if (e.type == "touchstart") {
-            // //console.log("############### TOUCHSTART");
-            // //console.log(e.type);
+            // ////console.log("############### TOUCHSTART");
+            // ////console.log(e.type);
             rg.slide.next(e);
             _satellite.track("Gallery Swipe Next");
             rg.parsley.track("Gallery Swipe Next");
             nydnDO.push({ event: "rgSwipe" });
             handled = true;
-            // //console.log("HANDLED = "+handled);
+            // ////console.log("HANDLED = "+handled);
         } else if (e.type == "click" && !handled) {
             rg.slide.next(e);
             rg.parsley.track("Gallery Click Next");
-            // //console.log("HANDLED = "+handled);
+            // ////console.log("HANDLED = "+handled);
         } else {
             handled = false;
         }
@@ -454,10 +457,10 @@ rg.cover.hide = function(e, callback) {
     });
 };
 rg.cover.show = function() {
-    // //console.log("##############  RG COVER SHOW");
+    // ////console.log("##############  RG COVER SHOW");
 
     // if (rg.slide.is(":visible")) {
-    // 	//console.log("##############  RG SLIDE IS VISIBLE");
+    // 	////console.log("##############  RG SLIDE IS VISIBLE");
     // 	rg.slide.hide();
 
     // }
@@ -518,7 +521,7 @@ rg.slide.show = function(callback) {
 };
 
 rg.slide.next = function(e) {
-    //console.log('rg.slide.next', e)
+    ////console.log('rg.slide.next', e)
     e.preventDefault();
     e.stopPropagation();
     if (nydn.interstitial > 0) {
@@ -540,11 +543,11 @@ rg.slide.next = function(e) {
     rg.slide.history();
 
     // self.COMSCORE && COMSCORE.beacon({ c1: "2" , c2: "7190388" });
-    // //console.log('self.COMSCORE && COMSCORE.beacon({ c1: "2" , c2: "7190388" });');
+    // ////console.log('self.COMSCORE && COMSCORE.beacon({ c1: "2" , c2: "7190388" });');
 
     nydnRequires([nydn.urls.comscore], function() {
         self.COMSCORE && COMSCORE.beacon({ c1: "2", c2: "7190388" });
-        //console.log(
+        ////console.log(
         //   'nydn rg COMSCORE TEST ðŸŽ¯ self.COMSCORE && COMSCORE.beacon({ c1: "2" , c2: "7190388" });'
         // );
     });
@@ -569,11 +572,11 @@ rg.slide.previous = function(e) {
     rg.slide.history();
 
     // self.COMSCORE && COMSCORE.beacon({ c1: "2" , c2: "7190388" });
-    // //console.log('self.COMSCORE && COMSCORE.beacon({ c1: "2" , c2: "7190388" });');
+    // ////console.log('self.COMSCORE && COMSCORE.beacon({ c1: "2" , c2: "7190388" });');
 
     nydnRequires([nydn.urls.comscore], function() {
         self.COMSCORE && COMSCORE.beacon({ c1: "2", c2: "7190388" });
-        //console.log(
+        ////console.log(
         //   'nydn rg COMSCORE TEST ðŸŽ¯ self.COMSCORE && COMSCORE.beacon({ c1: "2" , c2: "7190388" });'
         // );
     });
@@ -674,7 +677,7 @@ rg.slide.details = function() {
 };
 
 rg.slide.details.getHeight = function() {
-    // //console.log("######### get the height");
+    // ////console.log("######### get the height");
     if (rg.platform === "desktop") {
         rg.slide.details.collapseH = $("#rgs-title").outerHeight() + 97;
         $("#rgs-details.collapsed").css(
@@ -695,51 +698,51 @@ rg.slide.history = function() {
 rg.browserButtons = function() {
     window.onpopstate = function(e) {
         if (e.state) {
-            ////console.log('*********** EVENT STATE YES');
+            //////console.log('*********** EVENT STATE YES');
             var histState = history.state.replace("?pmSlide=", "");
             var histStateIndex = rg.slideIDs.indexOf(histState);
-            //console.log("********* HIST STATE INDEX = " + histStateIndex);
-            //console.log("********* HIST STATE = " + histState);
+            ////console.log("********* HIST STATE INDEX = " + histStateIndex);
+            ////console.log("********* HIST STATE = " + histState);
             if (histStateIndex < rg.slide.no) {
-                // //console.log("a");
-                ////console.log("********** IF STATE");
-                ////console.log("********* HIST STATE INDEX = " +histStateIndex);
-                ////console.log("********** RG SLIDE NO = "+rg.slide.no);
+                // ////console.log("a");
+                //////console.log("********** IF STATE");
+                //////console.log("********* HIST STATE INDEX = " +histStateIndex);
+                //////console.log("********** RG SLIDE NO = "+rg.slide.no);
 
                 if (histStateIndex == rg.slide.no - 1) {
-                    // //console.log("b");
-                    ////console.log("PREVIOUS BUTTON CLICKED");
+                    // ////console.log("b");
+                    //////console.log("PREVIOUS BUTTON CLICKED");
                     rg.browserBack(e);
                 } else if (histStateIndex == -1) {
-                    // //console.log("c");
-                    ////console.log("********** HIST STATE INDEX = -1");
+                    // ////console.log("c");
+                    //////console.log("********** HIST STATE INDEX = -1");
                     rg.slide.hide();
                     rg.cover.show();
                 } else {
-                    //console.log("d");
+                    ////console.log("d");
                     rg.slide.no = histStateIndex; //HERE IS THE PROBLEM *****
-                    ////console.log("********* PROBLEM AREA rg.slide.no :  browserButton : "+rg.slide.no);
-                    ////console.log("********* HIST STATE INDEX = " +histStateIndex);
-                    ////console.log("********* HIST STATE = "+histState);
+                    //////console.log("********* PROBLEM AREA rg.slide.no :  browserButton : "+rg.slide.no);
+                    //////console.log("********* HIST STATE INDEX = " +histStateIndex);
+                    //////console.log("********* HIST STATE = "+histState);
                     if (!$.isEmptyObject(rg.json)) {
-                        ////console.log("******* JSON EXISTS");
+                        //////console.log("******* JSON EXISTS");
                         rg.setMetaTagsAfter(rg.slide.details);
                     }
                 }
             } else if (histStateIndex > rg.slide.no) {
-                // //console.log("e");
-                ////console.log("********** ELSE STATE");
-                ////console.log("********** RG SLIDE NO = "+rg.slide.no);
+                // ////console.log("e");
+                //////console.log("********** ELSE STATE");
+                //////console.log("********** RG SLIDE NO = "+rg.slide.no);
                 if (histStateIndex == rg.slide.no + 1) {
-                    // //console.log("f");
-                    //console.log(histStateIndex);
-                    //console.log(rg.slide.no);
+                    // ////console.log("f");
+                    ////console.log(histStateIndex);
+                    ////console.log(rg.slide.no);
 
-                    ////console.log("NEXT BUTTON CLICKED");
+                    //////console.log("NEXT BUTTON CLICKED");
                     rg.browserNext(e);
                 } else {
                     rg.slide.no = histStateIndex;
-                    ////console.log("********* line 510 rg.slide.no :  browserButton : "+rg.slide.no);
+                    //////console.log("********* line 510 rg.slide.no :  browserButton : "+rg.slide.no);
                     if (!$.isEmptyObject(rg.json)) {
                         rg.setMetaTagsAfter(rg.slide.details);
                     }
@@ -756,25 +759,25 @@ rg.browserButtons = function() {
 rg.browserBack = function(e) {
     //NEED SEPARATE LOGIC FOR WHEN THE USER HITS BROWSER BACK FROM THUMBS PAGE
 
-    //console.log("****  rg.browserBack called");
-    //console.log("rg.slide.no = " + rg.slide.no);
+    ////console.log("****  rg.browserBack called");
+    ////console.log("rg.slide.no = " + rg.slide.no);
 
     if (rg.slide.no === 0) {
-        //console.log("****  rg.browserBack called A");
+        ////console.log("****  rg.browserBack called A");
         rg.slide.no--;
     } else if (rg.slide.no == rg.length) {
-        //console.log("****  rg.browserBack called B");
+        ////console.log("****  rg.browserBack called B");
         rg.slide.no--;
         rg.endslate.hide(e);
         rg.slide.show();
     } else {
-        //console.log("****  rg.browserBack called C");
+        ////console.log("****  rg.browserBack called C");
         rg.thumbs.hide(e);
         rg.slide.show();
         rg.slide.sliding("prev");
     }
     if (rg.slide.no === -1) {
-        //console.log("****  rg.browserBack called D");
+        ////console.log("****  rg.browserBack called D");
         rg.thumbs.hide(e);
         rg.slide.hide();
         setTimeout(function() {
@@ -787,7 +790,7 @@ rg.browserBack = function(e) {
 
 //BROWSER FORWARD
 rg.browserNext = function(e) {
-    // //console.log("#########  BROWSER NEXT CALLED" + rg.slide.no);
+    // ////console.log("#########  BROWSER NEXT CALLED" + rg.slide.no);
     rg.slide.sliding("next");
     if (rg.slide.no == rg.length) {
         rg.slide.hide();
@@ -950,10 +953,10 @@ rg.recirc.slideup = function() {
 };
 rg.recirc.taboolaed = false;
 rg.recirc.taboola = function() {
-    //console.log("nydn function: rg.recirc.taboola");
+    ////console.log("nydn function: rg.recirc.taboola");
     if (!rg.recirc.taboolaed) {
         nydnRequires([nydn.urls.taboola], function() {
-            //console.log("nydn function: rg.recirc.taboola download âœ“");
+            ////console.log("nydn function: rg.recirc.taboola download âœ“");
             window._taboola = window._taboola || [];
             if (nydn.bidder.contains("jumpstart"))
                 _taboola.push({
@@ -970,7 +973,7 @@ rg.recirc.taboola = function() {
                 _taboola.push({
                     flush: true
                 });
-            //console.log("nydn function: rg.recirc.taboola exe âœ“");
+            ////console.log("nydn function: rg.recirc.taboola exe âœ“");
         });
     }
 };
@@ -1017,7 +1020,7 @@ rg.thumbs.show = function(e, callback) {
         }
     });
     $("#rgt-show").attr("style", "");
-    //console.log("nydn analytics: Thumbnail View");
+    ////console.log("nydn analytics: Thumbnail View");
 };
 rg.thumbs.populate = function() {
     var thumbsLength = $("#rgt li").length;
@@ -1036,7 +1039,7 @@ rg.thumbs.populate = function() {
 };
 rg.endslate = {};
 rg.endslate.show = function() {
-    // //console.log("########## ENDSLATE SHOW");
+    // ////console.log("########## ENDSLATE SHOW");
     rg.ads.template = "endslate";
     $("#rge").fadeIn(function() {
         $("#rg").removeClass("slide");
@@ -1065,10 +1068,10 @@ rg.endslate.hide = function(e) {
 };
 rg.endslate.taboolaed = false;
 rg.endslate.taboola = function() {
-    //console.log("nydn function: rg.endlsate.taboola");
+    ////console.log("nydn function: rg.endlsate.taboola");
     if (!rg.endslate.taboolaed) {
         nydnRequires([nydn.urls.taboola], function() {
-            //console.log("nydn function: rg.endlsate.taboola DOWNLOADED");
+            ////console.log("nydn function: rg.endlsate.taboola DOWNLOADED");
             window._taboola = window._taboola || [];
 
             // if (nydn.bidder.contains("jumpstart")) _taboola.push({
@@ -1102,10 +1105,10 @@ rg.endslate.taboola = function() {
 };
 
 rg.endslate.taboolaJumpStart = function() {
-    //console.log("nydn function: rg.endlsate.taboolaJumpStart");
+    ////console.log("nydn function: rg.endlsate.taboolaJumpStart");
     if (!rg.endslate.taboolaed) {
         nydnRequires([nydn.urls.taboola], function() {
-            //console.log("nydn function: rg.endlsate.taboola DOWNLOADED JUMPSTART");
+            ////console.log("nydn function: rg.endlsate.taboola DOWNLOADED JUMPSTART");
             window._taboola = window._taboola || [];
             _taboola.push({
                 mode: "organic-thumbnails-k",
@@ -1127,7 +1130,7 @@ rg.endslate.taboolaJumpStart = function() {
 };
 
 rg.getJSON = function() {
-    //console.log("nydn function: rg.getJSON");
+    ////console.log("nydn function: rg.getJSON");
     $(function() {
         if ($.isEmptyObject(rg.json)) {
             $.getJSON(rg.jsonUrl)
@@ -1142,11 +1145,11 @@ rg.getJSON = function() {
                         rg.slideIDs.push(this.contentId); //PUSH SLIDE CONTENT IDS TO ARRAY
                     });
                     rg.preload();
-                    //console.log("nydn function: rg.getJSON âœ“");
+                    ////console.log("nydn function: rg.getJSON âœ“");
                 })
                 .fail(function(jqxhr, textStatus, error) {
                     var err = textStatus + ", " + error;
-                    //console.log("nydn function: rg.getJSON FAIL - " + err);
+                    ////console.log("nydn function: rg.getJSON FAIL - " + err);
                 });
         }
     });
@@ -1368,7 +1371,7 @@ rg.interstitial.countDownText = function(num) {
     }
 };
 rg.interstitial.countDown = function(num, autoAdv) {
-    //console.log("###### INTERSTITIAL COUNTDOWN");
+    ////console.log("###### INTERSTITIAL COUNTDOWN");
     rg.interstitial.addPreviewStyle(num);
     var count = setInterval(function() {
         rg.interstitial.countDownText(--num);
@@ -1395,13 +1398,13 @@ rg.interstitial.countDown = function(num, autoAdv) {
                 }, 3000);
             }
 
-            // //console.log("###### AUTO ADVANCE");
+            // ////console.log("###### AUTO ADVANCE");
         }
 
         // if(  $("#rg.cover").is(":visible")  ){
-        // 	//console.log("###### COVER IS VISIBLE");
+        // 	////console.log("###### COVER IS VISIBLE");
         // }else{
-        // 	//console.log("###### COVER IS NOTTT VISIBLE");
+        // 	////console.log("###### COVER IS NOTTT VISIBLE");
         // };
     }, 1000);
 };
@@ -1543,9 +1546,9 @@ rg.ads.dfp.download = function() {
     });
 };
 rg.ads.dfp.setup = function() {
-    //console.log("nydn ðŸŽ¯  rg.ads.setup");
+    ////console.log("nydn ðŸŽ¯  rg.ads.setup");
     nydnRequires([rg.ads.dfp.url], function() {
-        //console.log("nydn function: rg.ads.dfp.download âœ“ " + rg.platform);
+        ////console.log("nydn function: rg.ads.dfp.download âœ“ " + rg.platform);
         if (nydn.bidder.contains("jumpstart"))
             rg.ads.dfp.defineSlotStr =
                 rg.platform === "mobile"
@@ -1558,7 +1561,7 @@ rg.ads.dfp.setup = function() {
     });
 };
 rg.ads.dfp.cmdPush = function() {
-    //console.log("nydn ðŸŽ¯  rg.ads.cmdPush");
+    ////console.log("nydn ðŸŽ¯  rg.ads.cmdPush");
     googletag.cmd.push(function() {
         //JUMPSTART
         if (nydn.bidder.contains("jumpstart")) {
@@ -1741,7 +1744,7 @@ rg.ads.dfp.cmdPush = function() {
             }
         }
 
-        //console.log("nydn function: rg.ads.dfp.setup");
+        ////console.log("nydn function: rg.ads.dfp.setup");
         //if (nydn.bidder.contains("amazon") && (rg.platform !== "mobile")) rg.ads.amazon.exe();
         if (nydn.bidder.contains("amazon") && rg.platform !== "mobile")
             rg.ads.amazon.apstag.download();
@@ -1793,7 +1796,7 @@ rg.ads.dfp.cmdPush = function() {
             rg.ads.lotame.download();
         if (nydn.bidder.contains("optimera")) rg.ads.optimera.download2();
 
-        //console.log("nydn function: rg.ads.dfp.exe âœ“");
+        ////console.log("nydn function: rg.ads.dfp.exe âœ“");
 
         if (!nydn.bidder.contains("jumpstart") && nydn.outOfPage == "true")
             rg.ads.oop.push();
@@ -1812,7 +1815,7 @@ rg.ads.oop.push = function() {
 rg.ads.oop.refresh = function() {
     if (!nydn.bidder.contains("jumpstart") && nydn.outOfPage == "true") {
         googletag.pubads().refresh([rg.outUnit]);
-        //console.log("nydn function: rg.ads.refreshing adUnitx: " + rg.ads.out);
+        ////console.log("nydn function: rg.ads.refreshing adUnitx: " + rg.ads.out);
     }
 };
 rg.ads.oop2 = {};
@@ -1825,13 +1828,13 @@ rg.ads.oop2.push = function() {
 rg.ads.oop2.refresh = function() {
     if (!nydn.bidder.contains("jumpstart") && nydn.adOut2 === "x108") {
         googletag.pubads().refresh([rg.outUnit2]);
-        //console.log("nydn function: rg.ads.refreshing adUnity: " + rg.ads.out2);
+        ////console.log("nydn function: rg.ads.refreshing adUnity: " + rg.ads.out2);
     }
 };
 
 rg.ads.wait = {};
 rg.ads.wait.pubads = function() {
-    //console.log("nydn ðŸŽ¯  rg.ads.wait.pubads");
+    ////console.log("nydn ðŸŽ¯  rg.ads.wait.pubads");
     if (!$.isFunction(googletag.pubads)) {
         setTimeout(rg.ads.wait.pubads, 100);
         return;
@@ -1839,7 +1842,7 @@ rg.ads.wait.pubads = function() {
     rg.ads.wait.refresh();
 };
 rg.ads.wait.refresh = function() {
-    //console.log("nydn ðŸŽ¯  rg.ads.wait.refresh");
+    ////console.log("nydn ðŸŽ¯  rg.ads.wait.refresh");
     if (nydn.bidder.contains("jumpstart") || rg.platform == "mobile")
         rg.ads.dfp.checkList.done = 1;
     if (
@@ -1855,16 +1858,16 @@ rg.ads.wait.refresh = function() {
 rg.ads.template = rg.ads.template || "cover";
 rg.ads.refreshed = false;
 rg.ads.refresh = function(templateName) {
-    //console.log("nydn ðŸŽ¯  rg.ads.refresh");
+    ////console.log("nydn ðŸŽ¯  rg.ads.refresh");
     if (nydn.bidder.contains("dfp")) {
         nydnRequires(rg.ads.dfp.waitingList, function() {
-            //console.log("nydn ads: DFP waiting list âœ“âœ“âœ“ " + templateName);
+            ////console.log("nydn ads: DFP waiting list âœ“âœ“âœ“ " + templateName);
             rg.ads.wait.pubads();
         });
     }
 };
 rg.ads.refreshCheck = function(templateName) {
-    //console.log("nydn ðŸŽ¯  rg.ads.refreshCheck");
+    ////console.log("nydn ðŸŽ¯  rg.ads.refreshCheck");
     if (nydn.bidder.contains("indexExchange") && rg.platform !== "mobile")
         rg.ads.indexExchange.prep(templateName);
     if (
@@ -1893,7 +1896,7 @@ rg.ads.refreshCheck = function(templateName) {
     }
 };
 rg.ads.refreshTemplate = function(templateName) {
-    //console.log("nydn ðŸŽ¯  rg.ads.refreshTemplate " + templateName);
+    ////console.log("nydn ðŸŽ¯  rg.ads.refreshTemplate " + templateName);
     if (nydn.bidder.contains("optimera") && !nydn.bidder.contains("jumpstart"))
         rg.ads.optimera.refresh();
     if (rg.platform === "mobile" && nydn.bidder.contains("yieldbot")) {
@@ -1912,13 +1915,13 @@ rg.ads.refreshTemplate = function(templateName) {
     }
 };
 rg.ads.refreshSwitch = function(templateName) {
-    //console.log("nydn ðŸŽ¯  rg.ads.refreshSwitch " + templateName);
+    ////console.log("nydn ðŸŽ¯  rg.ads.refreshSwitch " + templateName);
     if (nydn.bidder.contains("amazon") && rg.platform != "mobile")
         rg.ads.amazon.apstag.setDisplayBids();
     switch (templateName) {
         case "cover":
             if (nydn.bidder.contains("jumpstart") && rg.platform === "mobile") {
-                //console.log(
+                ////console.log(
                 //   "nydn function: rg.ads.refreshingTemplate: " +
                 //     templateName +
                 //     " adUnit: " +
@@ -1941,7 +1944,7 @@ rg.ads.refreshSwitch = function(templateName) {
                 }
                 rg.wideUnit.setTargeting("template", "cover");
                 googletag.pubads().refresh([rg.wideUnit]);
-                //console.log(
+                ////console.log(
                 //   "nydn function: rg.ads.refreshingTemplate: " +
                 //     templateName +
                 //     " adUnit: " +
@@ -1982,7 +1985,7 @@ rg.ads.refreshSwitch = function(templateName) {
 
             if (nydn.bidder.contains("jumpstart")) {
                 googletag.pubads().refresh([rg.wideUnit]);
-                //console.log(
+                ////console.log(
                 //   "nydn function: rg.ads.refreshingTemplate: " +
                 //     templateName +
                 //     " adUnit: " +
@@ -1990,14 +1993,14 @@ rg.ads.refreshSwitch = function(templateName) {
                 // );
                 if (rg.platform === "desktop") {
                     googletag.pubads().refresh([rg.boxUnit]);
-                    //console.log(
+                    ////console.log(
                     //   "nydn function: rg.ads.refreshingTemplate: " +
                     //     templateName +
                     //     " adUnit: " +
                     //     rg.ads.xBox1
                     // );
                     googletag.pubads().refresh([rg.boxUnit2]);
-                    //console.log(
+                    ////console.log(
                     //   "nydn function: rg.ads.refreshingTemplate: " +
                     //     templateName +
                     //     " adUnit: " +
@@ -2007,7 +2010,7 @@ rg.ads.refreshSwitch = function(templateName) {
             } else if (rg.platform != "desktop") {
                 rg.wideUnit.setTargeting("template", "slide");
                 googletag.pubads().refresh([rg.wideUnit]);
-                //console.log(
+                ////console.log(
                 //   "nydn function: rg.ads.refreshingTemplate: " +
                 //     templateName +
                 //     " adUnit: " +
@@ -2015,7 +2018,7 @@ rg.ads.refreshSwitch = function(templateName) {
                 // );
             } else {
                 googletag.pubads().refresh([rg.boxUnit]);
-                //console.log(
+                ////console.log(
                 //   "nydn function: rg.ads.refreshingTemplate: " +
                 //     templateName +
                 //     " adUnit: " +
@@ -2038,7 +2041,7 @@ rg.ads.refreshSwitch = function(templateName) {
                 rg.interstitial.adsInitialized = true;
             }
             googletag.pubads().refresh([rg.ATFinterstitial]);
-            //console.log(
+            ////console.log(
             //   "nydn function: rg.ads.refreshingTemplate: " +
             //     templateName +
             //     " adUnit: " +
@@ -2052,25 +2055,25 @@ rg.ads.amazon = {};
 rg.ads.amazon.url = "http://c.amazon-adsystem.com/aax2/amzn_ads.js";
 rg.ads.amazon.download = function() {
     nydnRequires([rg.ads.amazon.url], function() {
-        //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.download âœ“");
+        ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.download âœ“");
         try {
             amznads.getAdsCallback("3088", function() {
                 amznads.setTargetingForGPTAsync("amznslots");
             });
-            //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.getAdsCallback âœ“");
+            ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.getAdsCallback âœ“");
         } catch (e) {
-            //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.getAdsCallback FAIL");
+            ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.getAdsCallback FAIL");
         }
     });
 };
 rg.ads.amazon.exe = function() {
     nydnRequires(rg.ads.dfp.waitingList, function() {
-        //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe");
+        ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe");
         try {
             amznads.setTargetingForGPTAsync("amznslots");
-            //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe âœ“");
+            ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe âœ“");
         } catch (e) {
-            //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe FAIL");
+            ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe FAIL");
         }
     });
 };
@@ -2089,25 +2092,25 @@ rg.ads.amazon.downloadTest = function() {
     rg.ads.amazon.url = "http://c.amazon-adsystem.com/aax2/amzn_ads.js";
     rg.ads.amazon.download = function() {
         nydnRequires([rg.ads.amazon.url], function() {
-            //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.download âœ“");
+            ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.download âœ“");
             try {
                 amznads.getAdsCallback("3088", function() {
                     amznads.setTargetingForGPTAsync("amznslots");
                 });
-                //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.getAdsCallback âœ“");
+                ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.getAdsCallback âœ“");
             } catch (e) {
-                //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.getAdsCallback FAIL");
+                ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.getAdsCallback FAIL");
             }
         });
     };
     rg.ads.amazon.exe = function() {
         nydnRequires(rg.ads.dfp.waitingList, function() {
-            //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe");
+            ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe");
             try {
                 amznads.setTargetingForGPTAsync("amznslots");
-                //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe âœ“");
+                ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe âœ“");
             } catch (e) {
-                //console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe FAIL");
+                ////console.log("nydn ra  ðŸŽ¯   rg.ads.amazon.exe FAIL");
             }
         });
     };
@@ -2117,7 +2120,7 @@ rg.ads.amazon.downloadTest = function() {
     rg.ads.amazon.apstag = {};
     rg.ads.amazon.apstag.url = "http://c.amazon-adsystem.com/aax2/apstag.js";
     rg.ads.amazon.apstag.slotRenderEnded = function() {
-        //console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.slotRenderEnded âœ“");
+        ////console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.slotRenderEnded âœ“");
         var amznKeysToTarget = ["amznbid", "amzniid"];
         googletag.cmd.push(function() {
             googletag.pubads().addEventListener("slotRenderEnded", function(e) {
@@ -2164,17 +2167,17 @@ rg.ads.amazon.downloadTest = function() {
             "script",
             "//c.amazon-adsystem.com/aax2/apstag.js"
         );
-        //console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.prep");
+        ////console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.prep");
     };
     rg.ads.amazon.apstag.download = function() {
         nydnRequires([rg.ads.amazon.apstag.url], function() {
-            //console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.download âœ“");
+            ////console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.download âœ“");
             rg.ads.amazon.apstag.initialize();
         });
     };
     rg.ads.amazon.apstag.initialize = function() {
         nydnRequires([rg.ads.amazon.apstag.url], function() {
-            //console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.initialize");
+            ////console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.initialize");
             apstag.init({
                 pubID: "3088",
                 adServer: "googletag",
@@ -2184,7 +2187,7 @@ rg.ads.amazon.downloadTest = function() {
         });
     };
     rg.ads.amazon.apstag.fetchBids = function() {
-        //console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.fetchBids");
+        ////console.log("nydn ðŸŽ¯  rg.ads.amazon.apstag.fetchBids");
         var nydnSlots = [],
             nydnSlot = {};
         nydnSlots = [
@@ -2193,7 +2196,7 @@ rg.ads.amazon.downloadTest = function() {
             { slotID: "div-gpt-ad-x102", sizes: [[300, 250]] },
             { slotID: "div-gpt-ad-x106", sizes: [[300, 250], [300, 600], [160, 600]] }
         ];
-        //console.log(
+        ////console.log(
         //   "nydn ðŸŽ¯  rg.ads.amazon.apstag.fetchBids slots " +
         //     JSON.stringify(nydnSlots)
         // );
@@ -2201,14 +2204,14 @@ rg.ads.amazon.downloadTest = function() {
             rg.ads.amazon.apstag.bids = bids;
             rg.ads.dfp.checkList.bidder["amazon"] = true;
             rg.ads.dfp.checkList.done += 1;
-            //console.log(
+            ////console.log(
             //   "nydn ðŸŽ¯  rg.ads.amazon.apstag.fetchBids bids " + JSON.stringify(bids)
             // );
         });
     };
     rg.ads.amazon.apstag.setDisplayBids = function() {
         var bid = rg.ads.amazon.apstag.bids;
-        //console.log(
+        ////console.log(
         //   "nydn ðŸŽ¯  rg.ads.amazon.apstag.setDisplayBids bid= " + JSON.stringify(bid)
         // );
         apstag.setDisplayBids();
@@ -2226,7 +2229,7 @@ rg.ads.sonobi.download = function() {
 };
 rg.ads.sonobi.setup = function() {
     nydnRequires([rg.ads.sonobi.url], function() {
-        //console.log("nydn function: rg.ads.sonobi.download âœ“");
+        ////console.log("nydn function: rg.ads.sonobi.download âœ“");
         sbi_morpheus.enableReactiveSizes();
         sbi_morpheus.register(
             "div-gpt-ad-" + rg.ads.xWide1,
@@ -2237,12 +2240,12 @@ rg.ads.sonobi.setup = function() {
             "div-gpt-ad-" + rg.ads.interstitial,
             "ebfb261c83ba67a16a8e"
         );
-        //console.log("nydn function: rg.ads.sonobi.setup");
+        ////console.log("nydn function: rg.ads.sonobi.setup");
     });
 };
 rg.ads.sonobi.exe = function() {
     nydnRequires(rg.ads.dfp.waitingList, function() {
-        //console.log("nydn function: rg.ads.sonobi.exe âœ“");
+        ////console.log("nydn function: rg.ads.sonobi.exe âœ“");
     });
 };
 //OPENX
@@ -2257,7 +2260,7 @@ rg.ads.openx.download = function() {
 };
 rg.ads.openx.setup = function() {
     nydnRequires([rg.ads.openx.url], function() {
-        //console.log("nydn function: rg.ads.openx.download âœ“");
+        ////console.log("nydn function: rg.ads.openx.download âœ“");
     });
 };
 //JUMPSTART
@@ -2314,11 +2317,11 @@ rg.ads.jumpstart.exe = function() {
         rg.boxUnit2.setTargeting("fuel", jagvars.fuel);
         // rg.wideUnit2.setTargeting("fuel", jagvars.fuel);
     }
-    //console.log("nydn function: rg.ads.jumpstart.exe âœ“");
+    ////console.log("nydn function: rg.ads.jumpstart.exe âœ“");
 };
 rg.ads.jumpstart.download = function() {
     nydnRequires([rg.ads.jumpstart.url], function() {
-        //console.log("nydn function: rg.ads.jumpstart.download âœ“");
+        ////console.log("nydn function: rg.ads.jumpstart.download âœ“");
     });
 };
 //LOTAME
@@ -2334,11 +2337,11 @@ rg.ads.lotame.download = function() {
 };
 rg.ads.lotame.setup = function() {
     nydnRequires([rg.ads.lotame.url], function() {
-        //console.log("nydn function: rg.ads.lotame.download âœ“");
+        ////console.log("nydn function: rg.ads.lotame.download âœ“");
     });
 };
 rg.ads.lotame.exe = function() {
-    //console.log("nydn function: rg.ads.lotame.exe");
+    ////console.log("nydn function: rg.ads.lotame.exe");
 };
 
 function get_cc_extr_url() {
@@ -2390,7 +2393,7 @@ function ccauds(data) {
         nydnRequires([rg.ads.dfp.url], function() {
             googletag.cmd.push(function() {
                 googletag.pubads().setTargeting(dartCCKey, [dartCC]);
-                //console.log("nydn function: rg.ads.lotame.exe âœ“");
+                ////console.log("nydn function: rg.ads.lotame.exe âœ“");
             });
         });
     }
@@ -2466,9 +2469,9 @@ rg.ads.optimera.download = function() {
     })();
 };
 rg.ads.optimera.exe = function() {
-    //console.log("nydn function: rg.ads.optimera.exe");
+    ////console.log("nydn function: rg.ads.optimera.exe");
     nydnRequires([rg.ads.optimera.src, rg.ads.dfp.url], function() {
-        //console.log("nydn function: rg.ads.optimera.src âœ“");
+        ////console.log("nydn function: rg.ads.optimera.src âœ“");
         if (rg.platform === "desktop") {
             googletag
                 .pubads()
@@ -2485,12 +2488,12 @@ rg.ads.optimera.exe = function() {
 };
 rg.ads.optimera.download2 = function() {
     nydnRequires([rg.ads.optimera.url], function() {
-        //console.log("nydn function: rg.ads.optimera.url âœ“");
+        ////console.log("nydn function: rg.ads.optimera.url âœ“");
     });
 };
 rg.ads.optimera.refresh = function() {
     nydnRequires([rg.ads.optimera.url], function() {
-        //console.log("nydn function: rg.ads.optimera.refresh");
+        ////console.log("nydn function: rg.ads.optimera.refresh");
         oPageUnload("1");
     });
 };
@@ -2502,24 +2505,24 @@ rg.ads.indexExchange.url = "http://js-sec.indexww.com/ht/nydn.js";
 rg.ads.indexExchange.download = function() {
     window.indexapi = window.indexapi || {};
     window.indexapi.disableInitialLoad = true;
-    //console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.download âœ“");
+    ////console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.download âœ“");
 };
 rg.ads.indexExchange.exe = function() {
     nydnRequires(rg.ads.dfp.waitingList, function(a) {
-        //console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.exe");
+        ////console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.exe");
         if (
             typeof indexapi !== "undefined" &&
             typeof indexapi.cygnus_args !== "undefined" &&
             typeof indexapi.cygnus_args.slots !== "undefined"
         ) {
-            //console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.exe âœ“");
+            ////console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.exe âœ“");
         } else {
-            //console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.exe FAIL");
+            ////console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.exe FAIL");
         }
     });
 };
 rg.ads.indexExchange.prep = function(templateName) {
-    //console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.prep");
+    ////console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.prep");
     cygnus_callback_timeout = 1000;
     cygnus_callback_refresh = function() {
         rg.ads.refreshTemplate(rg.ads.template);
@@ -2542,7 +2545,7 @@ rg.ads.indexExchange.hook = function() {
     cygnus_callback_refresh = function() {
         rg.ads.refreshTemplate(rg.ads.template);
     };
-    //console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.hook");
+    ////console.log("nydn ra  ðŸŽ¯   rg.ads.indexExchange.hook");
     if (
         typeof indexapi !== "undefined" &&
         typeof indexapi.refresh_hook === "function"
@@ -2566,7 +2569,7 @@ rg.ads.yieldbot.waitingList = [];
 rg.ads.yieldbot.download = function() {
     var ybotq = ybotq || [];
     nydnRequires([rg.ads.yieldbot.url], function() {
-        //console.log("nydn function: rg.ads.yieldbot.url âœ“");
+        ////console.log("nydn function: rg.ads.yieldbot.url âœ“");
         rg.ads.yieldbot.exe();
     });
 };
@@ -2581,7 +2584,7 @@ rg.ads.yieldbot.exe = function() {
         yieldbot.go();
     });
     nydnRequires(rg.ads.dfp.waitingList, function() {
-        //console.log("nydn function: rg.ads.yieldbot.exe wairing for dfp list âœ“");
+        ////console.log("nydn function: rg.ads.yieldbot.exe wairing for dfp list âœ“");
         if (nydn.bidder.contains("jumpstart"))
             rg.ads.dfp.defineSlotStr =
                 rg.platform === "mobile"
@@ -2594,7 +2597,7 @@ rg.ads.yieldbot.exe = function() {
             rg.ads.dfp.cmdPush();
         });
     });
-    //console.log("nydn function: rg.ads.yieldbot.exe âœ“");
+    ////console.log("nydn function: rg.ads.yieldbot.exe âœ“");
 };
 /*==FACEBOOK ==*/
 (function(e, a, f) {
@@ -2642,7 +2645,7 @@ rg.dtm.url =
     window.location.href.indexOf("wwwqa") > -1 ? rg.dtm.urlQA : rg.dtm.urlPROD;
 rg.dtm.download = function() {
     nydnRequires([rg.dtm.url], function() {
-        //console.log("nydn function: rg.dtm.download âœ“");
+        ////console.log("nydn function: rg.dtm.download âœ“");
         _satellite.pageBottom();
     });
 };
@@ -2673,7 +2676,7 @@ rg.parsley.download = function() {
         e.src = h + "//" + u + "/p.js";
         r.appendChild(e);
     })("script", "parsely", document);
-    //console.log("nydn function: rg.parsely.download âœ“");
+    ////console.log("nydn function: rg.parsely.download âœ“");
 };
 rg.parsley.track = function(tagName) {
     PARSELY.beacon.trackPageView({
@@ -2682,7 +2685,7 @@ rg.parsley.track = function(tagName) {
         js: 1,
         action_name: tagName
     });
-    //console.log("nydn function: rg.parsely.track");
+    ////console.log("nydn function: rg.parsely.track");
 };
 rg.parsley.trackPageView = function() {
     if (PARSELY.lastRequest == undefined) {
@@ -2693,12 +2696,12 @@ rg.parsley.trackPageView = function() {
             action_name: "pageview"
         });
     }
-    //console.log("nydn function: rg.parsely.trackPageView");
+    ////console.log("nydn function: rg.parsely.trackPageView");
 };
 //NEWSROOM
 rg.newsroom = function() {
     nydnRequires([nydn.urls.newsroom], function() {
-        //console.log("nydn function: rg.newsroom.download âœ“");
+        ////console.log("nydn function: rg.newsroom.download âœ“");
     });
 };
 //GTM
@@ -2706,7 +2709,7 @@ rg.gtm = {};
 rg.gtm.getURL = function() {
     if (window.location.href.indexOf("wwwqa") > -1) rg.gtm.url = "GTM-MFQKX7";
     else rg.gtm.url = "GTM-M9G2T8";
-    //console.log("nydn rg  ðŸŽ¯   rg.gtm.getURL " + rg.gtm.url);
+    ////console.log("nydn rg  ðŸŽ¯   rg.gtm.getURL " + rg.gtm.url);
     return rg.gtm.url;
 };
 rg.gtm.download = function() {
@@ -2724,7 +2727,7 @@ rg.gtm.download = function() {
         j.src = "//www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
     })(window, document, "script", "nydnDO", rg.gtm.url);
-    //console.log("nydn rg  ðŸŽ¯   rg.gtm.download âœ“");
+    ////console.log("nydn rg  ðŸŽ¯   rg.gtm.download âœ“");
 };
 //QUANCAST
 var ezt = ezt || [];
@@ -2734,7 +2737,7 @@ var ezt = ezt || [];
     rg.quantcast.url = "http://pixel.quantserve.com/aquant.js?a=p-af_gBGFZgopbs";
     rg.quantcast.download = function() {
         nydnRequires([rg.quantcast.url], function() {
-            //console.log("nydn rg  ðŸŽ¯   rg.quantcast.download âœ“");
+            ////console.log("nydn rg  ðŸŽ¯   rg.quantcast.download âœ“");
         });
     };
 }
@@ -2762,7 +2765,7 @@ rg.rr = function() {
 
         $("#rga > div").scroll(function() {
             isScrolling = true;
-            ////console.log(isScrolling);
+            //////console.log(isScrolling);
             clearTimeout($.data(this, "scrollTimer"));
             $.data(
                 this,
@@ -2816,14 +2819,14 @@ rg.sourcepoint.download = function() {
 };
 
 rg.sourcepoint.listen = function() {
-    //console.log("pageBottom nydn rg  ðŸŽ¯   rg.sourcepoint.listen");
+    ////console.log("pageBottom nydn rg  ðŸŽ¯   rg.sourcepoint.listen");
     document.addEventListener("sp.blocking", function(e) {
         $("#rg-scripts").append("<div id='rg-blocking'></div>");
-        //console.log("pageBottom nydn rg  ðŸŽ¯   rg.sourcepoint.listen - BLOCKING");
+        ////console.log("pageBottom nydn rg  ðŸŽ¯   rg.sourcepoint.listen - BLOCKING");
     });
     document.addEventListener("sp.not_blocking", function(e) {
         $("#rg-scripts").append("<div id='rg-not-blocking'></div>");
-        //console.log(
+        ////console.log(
         //   "pageBottom nydn rg  ðŸŽ¯   rg.sourcepoint.listen - NOT BLOCKING"
         // );
     });
@@ -2832,7 +2835,7 @@ rg.sourcepoint.listen = function() {
 rg.comscore = {};
 rg.comscore.download = function() {
     nydnRequires([nydn.urls.comscore], function() {
-        //console.log("nydn rg  ðŸŽ¯   rg.comscore.download âœ“");
+        ////console.log("nydn rg  ðŸŽ¯   rg.comscore.download âœ“");
         var _comscore = _comscore || [];
         _comscore.push({ c1: "2", c2: "7190388" });
     });
@@ -2854,7 +2857,7 @@ rg.nielsen.param = {
 rg.nielsen.download = function() {
     var ogURL = $('meta[property="og:url"]').attr("content");
     var ogURLnoNYDN = ogURL.slice(ogURL.indexOf(".com") + 5);
-    //console.log("nydn ra  ðŸŽ¯   rg.nielsen.download " + ogURLnoNYDN);
+    ////console.log("nydn ra  ðŸŽ¯   rg.nielsen.download " + ogURLnoNYDN);
     // rg.nielsen.param["nol_assetname"] =  $('meta[property="og:url"]').attr('content');
     rg.nielsen.param["nol_assetname"] = $("body").attr("data-section");
     (function(params) {
@@ -2869,7 +2872,7 @@ rg.nielsen.download = function() {
         script.src = url;
         window.document.getElementsByTagName("head")[0].appendChild(script);
     })(rg.nielsen.param);
-    //console.log("nydn ra  ðŸŽ¯   rg.nielsen.download âœ“");
+    ////console.log("nydn ra  ðŸŽ¯   rg.nielsen.download âœ“");
 };
 
 rg.shareToggle = function() {
@@ -2898,7 +2901,7 @@ rg.shareToggle = function() {
                                     "data-" + oneDate,
                                     scriptObj.scriptData[oneDate]
                                 );
-                                //console.log(
+                                ////console.log(
                                 //   "nydn ðŸŽ¯  rg.script.download data",
                                 //   oneDate,
                                 //   scriptObj.scriptData[oneDate]
@@ -2908,7 +2911,7 @@ rg.shareToggle = function() {
                         if (scriptObj.scriptData.scriptNode != null) {
                             rhScript.scriptNode = scriptObj.scriptData.scriptNode;
                             rhScript.downloaded = true;
-                            //console.log("nydn ðŸŽ¯  rg.script.download " + scriptURL + " âœ“ ");
+                            ////console.log("nydn ðŸŽ¯  rg.script.download " + scriptURL + " âœ“ ");
                             rhScript.scriptNode.insertBefore(
                                 rhScript,
                                 rhScript.scriptNode.childNodes[0]
@@ -2925,6 +2928,6 @@ rg.shareToggle = function() {
                 node.parentNode.insertBefore(rhScript, node);
             }
         })();
-        //console.log("nydn ðŸŽ¯  rg.script.download " + scriptURL + " âœ“ ");
+        ////console.log("nydn ðŸŽ¯  rg.script.download " + scriptURL + " âœ“ ");
     };
 }
