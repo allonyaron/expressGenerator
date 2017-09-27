@@ -257,9 +257,16 @@
             </div>
          </nav>
       </header>
-      <main id="r-main" role="main">
-         <section class="rc combo" data-mp="row 4" data-mn="listview">
 
+<!-- everything above should be the standard header code -->
+      <main id="r-main" role="main">
+
+         <section class="rc combo" data-mp="row 4" data-mn="listview">
+  <!-- This section was taken from http://www.nydailynews.com/autos/buyers-guide 'Car Buying Advice' section
+        changes to this module
+        - remove the <footer/> element
+        - add header description in <header> tag
+  -->
             <div class="r-left" data-lp="Col 1" data-lpn="List Callout 2">
                <section class="rc c1">
                   <header data-lp="" data-lpn="Section Title" data-lpc="" class="rch">
@@ -269,8 +276,8 @@
                      <div class="header-description">
                         <p>Bacon ipsum dolor amet pork belly bacon frankfurter tri-tip, pork chop ribeye meatball fatback beef meatloaf. Sausage short loin tenderloin swine kielbasa prosciutto porchetta. Jowl tail shank pork belly ribeye sausage beef ribs landjaeger. Porchetta shank cow boudin shoulder strip steak pork tri-tip venison chuck. Kielbasa pork loin chicken rump landjaeger, turkey ball tip drumstick doner chuck. Tongue t-bone flank alcatra meatloaf biltong sirloin.</p>
                       </div>
+<!-- sort dropdown - in progress
                       <div class="r-srch-filter  on">
-                    <!--sort dropdown -->
                       <div class="r-srch-date drop-wrap"> 
                         <div class="r-srch-author drop-wrap"> <span class="r-srch-drop-hdr">Sort by Year:</span>
                           <div class="r-srch-drop"> <span>All</span>
@@ -280,9 +287,12 @@
                                   <li><a href="#">2015</a></li>
                               </ul>
                           </div>
-                      </div>
+                      </div> 
+in progress -->
 
                   </header>
+
+
                   <div class="rtw">
                      <div class="rtww" data-tb-region="listview-7.2733927">
                         <a data-lo="1" data-l-cid="1.2760168" data-tb-region-item="" class="rt tll n1" href="http://www.nydailynews.com/autos/street-smarts/how-to-avoid-buying-flood-damaged-car-article-article-1.2760168">
@@ -356,6 +366,9 @@
                         </a>
                      </div>
                   </div>
+  <!-- use pagination markup from http://www.nydailynews.com/search-results/search-results-7.113?q=giants&nydn-search-url=site
+      active number should get on class
+   -->
                   <ul class="rp">
                       <li class="rp-previous"> <a href="#">Previous</a> </li>
                       <li class="rp-n"> <a href="#">1</a> </li>
@@ -371,6 +384,20 @@
                   </ul>
                </section>
             </div>
+<!-- right rail with ads-->
+            <aside class="r-aside" data-lp="Col 2" data-lpn="listAside">
+              <div class="r-ad">
+                  <div id="div-gpt-ad-x102" adonis-marker></div>
+              </div>
+               <div class="r-ad">
+                  <div id="div-gpt-ad-x103" adonis-marker></div>
+               </div>
+               <div class="r-ad">
+                  <div id="div-gpt-ad-x104" adonis-marker></div>
+               </div>
+            </aside>
+
+<!-- this is the buyers guide module from the top of  http://www.nydailynews.com/autos/buyers-guide -->
             <div class="r-left" data-lp="Col 1" data-lpn="">
                <header data-lp="" data-lpn="Section Title" data-lpc="" class="rch">
                   <h1 class="rch-h">Buyer's Guide</h1>
@@ -437,22 +464,15 @@
                   </div>
                </section>
             </div>
-            <aside class="r-aside" data-lp="Col 2" data-lpn="listAside">
-              <div class="r-ad">
-                  <div id="div-gpt-ad-x102" adonis-marker></div>
-              </div>
-               <div class="r-ad">
-                  <div id="div-gpt-ad-x103" adonis-marker></div>
-               </div>
-               <div class="r-ad">
-                  <div id="div-gpt-ad-x104" adonis-marker></div>
-               </div>
-            </aside>
+
          </section>
+<!-- bottom ad -->
          <div class="r-ad">
             <div id="div-gpt-ad-x105" adonis-marker></div>
          </div>
       </main>
+
+<!-- everything below should be standard footer code -->
       <footer id="rf">
          <!-- HTML Element: 7.2945742 -->   
          <style>
