@@ -6,7 +6,7 @@ var nydnRequires = require.config({
     waitSeconds: 10
 });
 
-var localIP = "http://172.24.62.83:3000";
+var localIP = "http://172.24.63.57:3000";
 
 nydn.domain = "assets.nydailynews.com";
     // window.location.href.split("/")[2] == "wwwqa.nydailynews.com"
@@ -39,8 +39,18 @@ Array.prototype.contains = function(needle) {
 };
 var cc_client_id = 4867;
 var cc_extr_callback = "ccauds";
+
+
+
 nydnRequires([nydn.urls.nydnQuery], function() {
-    ////console.log("nydn function: jquery download âœ“");
+
+    // $(document).ready(function() {
+    //     if (rg.isFacebookApp(ua)) { // Facebook in-app browser detected
+    //       rg.adaptCSSFbBrowser();
+    //     }    
+    // });
+
+
     $(function() {
         rg.initialize();
         //$("#rg-body").css("border","1px solid red");
@@ -95,6 +105,19 @@ rg.origin = "";
 rg.closeLink = "";
 rg.bps.src = "";
 rg.adViewport = "";
+
+var ua = navigator.userAgent || navigator.vendor || window.opera;
+rg.isFacebookApp = function() {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+}
+
+rg.adaptCSSFbBrowser = function() {
+    // var testText = 'not in facebook';
+    var windowHeight = window.screen.height - 158;
+    document.getElementById('rg-body').style.height = windowHeight + 'px';
+};
+
 
 var rgShareOptions = {
     downloadOnHover: true,
@@ -452,6 +475,11 @@ rg.cover.initialize = function() {
 };
 rg.cover.hide = function(e, callback) {
     e.preventDefault();
+
+    if (rg.isFacebookApp(ua)) { // Facebook in-app browser detected
+      rg.adaptCSSFbBrowser();
+    } 
+
     $("#rgc").fadeOut(function() {
         $("#rg").removeClass("cover");
     });

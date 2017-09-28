@@ -80,7 +80,7 @@
          
          "refresh" : 5
          };
-      </script> <script data-main="javascripts/rg.js?r=201706290008"
+      </script> <script data-main="javascripts/rg.js?r=201706290022"
       src="http://assets.nydailynews.com/nydn/js/require.js?r=20170802200009" defer></script>  
 
 <script
@@ -573,7 +573,7 @@
   overflow: hidden;
 }*/
 #rgs-details {
-    bottom: unset;
+    bottom: 158px;
 }
 #rg-description {
     display: block;
@@ -586,27 +586,20 @@
   position: unset;
 }
 </style>
-<script type="text/javascript">
-/*!
- * verge 1.10.2+201705300050
- * http://npm.im/verge
- * MIT Ryan Van Etten
- */
-!function(a,b,c){"undefined"!=typeof module&&module.exports?module.exports=c():a[b]=c()}(this,"verge",function(){function a(){return{width:k(),height:l()}}function b(a,b){var c={};return b=+b||0,c.width=(c.right=a.right+b)-(c.left=a.left-b),c.height=(c.bottom=a.bottom+b)-(c.top=a.top-b),c}function c(a,c){return!(!(a=a&&!a.nodeType?a[0]:a)||1!==a.nodeType)&&b(a.getBoundingClientRect(),c)}function d(b){b=null==b?a():1===b.nodeType?c(b):b;var d=b.height,e=b.width;return d="function"==typeof d?d.call(b):d,(e="function"==typeof e?e.call(b):e)/d}var e={},f="undefined"!=typeof window&&window,g="undefined"!=typeof document&&document,h=g&&g.documentElement,i=f.matchMedia||f.msMatchMedia,j=i?function(a){return!!i.call(f,a).matches}:function(){return!1},k=e.viewportW=function(){var a=h.clientWidth,b=f.innerWidth;return a<b?b:a},l=e.viewportH=function(){var a=h.clientHeight,b=f.innerHeight;return a<b?b:a};return e.mq=j,e.matchMedia=i?function(){return i.apply(f,arguments)}:function(){return{}},e.viewport=a,e.scrollX=function(){return f.pageXOffset||h.scrollLeft},e.scrollY=function(){return f.pageYOffset||h.scrollTop},e.rectangle=c,e.aspect=d,e.inX=function(a,b){var d=c(a,b);return!!d&&d.right>=0&&d.left<=k()},e.inY=function(a,b){var d=c(a,b);return!!d&&d.bottom>=0&&d.top<=l()},e.inViewport=function(a,b){var d=c(a,b);return!!d&&d.bottom>=0&&d.right>=0&&d.top<=l()&&d.left<=k()},e});
-</script>
+
+
 
 <script type="text/javascript">
-function adaptCSSFbBrowser() {
+function isFacebookApp() {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
-    // if (isFacebookApp(ua)) { // Facebook in-app browser detected
-    //     $('#rg-body').css('height', '0'); // Update css
-    // }
-    // $('.bottombar').css('height', '50vh');
-    // var html = document.querySelector('html');
-    // html.style.height = '50px';
+    return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+}
 
-     // var windowHeight = 410;
-     var windowHeight = window.screen.height - 158;
+function adaptCSSFbBrowser() {
+    // var testText = 'not in facebook';
+    var windowHeight = window.screen.height - 158;
+    document.getElementById('rg-body').style.height = windowHeight + 'px';
+     // var windowHeight = window.screen.height - 158;
     // var windowHeight = window.innerHeight;
     // var windowHeight = $(window).height()
     
@@ -627,9 +620,10 @@ function adaptCSSFbBrowser() {
  // $( "#rg-description" ).append( "<p>$('#rg-body').height(window.innerHeight)</p>" + $('#rg-body').height(window.innerHeight) );
 // $( "#rg-description" ).append( "<p>Math.max(document.documentElement.clientHeight, window.innerHeight || 0);</p>" + Math.max(document.documentElement.clientHeight, window.innerHeight || 0) );
 
-$( "#rg-description" ).append( "<p>window.innerHeight</p>" + window.innerHeight );
+// $( "#rg-description" ).append( "testText - " + testText );
+// $( "#rg-description" ).append( "<p>window.innerHeight</p>" + window.innerHeight );
 // // $( "#rg-description" ).append( "<p>$(window).height()</p>" + $(window).height() );
- $( "#rg-description" ).append( "<p>window.screen.height</p>" + window.screen.height );
+ // $( "#rg-description" ).append( "<p>window.screen.height</p>" + window.screen.height );
 // $( "#rg-description" ).append( "<p>document.documentElement.clientHeight</p>" + document.documentElement.clientHeight );
 // $( "#rg-description" ).append( "<p>document.body.clientHeight</p>" + document.body.clientHeight );
 // $( "#rg-description" ).append( "<p>document.body.offsetHeight</p>" + document.body.offsetHeight );
@@ -638,13 +632,16 @@ $( "#rg-description" ).append( "<p>window.innerHeight</p>" + window.innerHeight 
 // $( "#rg-description" ).append( "<p>window.screen.availHeight</p>" + window.screen.availHeight );
 
 
-    document.getElementById('rg-body').style.height = windowHeight + 'px';
-    console.log('testies - ' + document.body.style.height);
+    // document.getElementById('rg-body').style.height = windowHeight + 'px';
+    // console.log('testies - ' + document.body.style.height);
   };
 
 $(document).ready(function() {
 //  alert('testies');
-  adaptCSSFbBrowser();
+var ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (isFacebookApp(ua)) { // Facebook in-app browser detected
+      adaptCSSFbBrowser();
+    }    
 });
 </script>
 
